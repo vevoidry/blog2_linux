@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>编辑页</title>
+<!-- Bootstrap核心CSS -->
+<link rel="stylesheet" href="/css/bootstrap.min.css">
+<!-- JQuery -->
+<script type="text/javascript" src="/js/jquery-3.4.1.min.js"></script>
+<!-- 引入自定义javascript -->
+<script type="text/javascript" src="/js/controller/userController.js"></script>
+<script type="text/javascript" src="/js/edit.js"></script>
+</head>
+<body th:onload="'startFunction('+${userId}+')'">
+	<!-- 首页标题 -->
+	<div th:include="template/header::blog_header"></div>
+	<!-- 修改头像 -->
+	<div id="imageArea"></div>
+	<!-- 个人信息 -->
+	<div id="userArea"></div>
+</body>

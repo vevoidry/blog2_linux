@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>文章页</title>
+<!-- Bootstrap核心CSS -->
+<link rel="stylesheet" href="/css/bootstrap.min.css">
+<!-- JQuery -->
+<script type="text/javascript" src="/js/jquery-3.4.1.min.js"></script>
+<!-- 引入自定义javascript -->
+<script type="text/javascript" src="/js/controller/articleController.js"></script>
+<script type="text/javascript" src="/js/controller/commentController.js"></script>
+<script type="text/javascript" src="/js/util.js"></script>
+<script type="text/javascript" src="/js/article.js"></script>
+</head>
+<body th:onload="'startFunction('+${articleId}+')'">
+	<!-- 首页标题 -->
+	<div th:include="template/header::blog_header"></div>
+	<div class="row">
+		<div class="col-lg-push-1 col-lg-8">
+			<!-- 主帖 -->
+			<div id="articleArea"></div>
+			<!-- 已有回复区 -->
+			<div id="commentArea"></div>
+			<!-- 分页区 -->
+			<div id="pageArea"></div>
+			<!-- 回复操作区 -->
+			<form action="/comments" method="post">
+				<div>
+					<input type="text" name="articleId" th:value="${articleId}" hidden>
+				</div>
+				<textarea class="form-control" rows="3" name="content" placeholder="回复内容"></textarea>
+				<button type="submit">发送</button>
+			</form>
+		</div>
+		<div class="col-lg-push-1 col-lg-2">
+			<!-- 登录与注册 -->
+			<div th:if="${session.user}==null">
+				<div class="btn-group" role="group">
+					<a href="/authentication/login">
+						<button type="button" class="btn btn-default">登录/注册</button>
+					</a><span class="small">登录后可回复</span>
+				</div>
+			</div>
+			<!-- 用户信息 -->
+			<div th:if="${session.user}!=null">
+				<div>
+					<a th:href="'/user?userId='+${session.user.id}"> <span
+						th:text="${session.user.nickname}"></span>
+					</a>
+				</div>
+				<div>
+					<img th:src="'/image/'+${session.user.image}" alt="Image"
+						class="img-rounded" width="100px" height="100px">
+				</div>
+				<div>
+					性别：<span th:text="${session.user.gender}"></span>
+				</div>
+				<div>
+					生日：<span th:text="${session.user.birthday}"></span>
+				</div>
+				<div>
+					个人简介：<span th:text="${session.user.profile}"></span>
+				</div>
+				<div>
+					<a href="/authentication/logout">
+						<button type="button" class="btn btn-default">退出</button>
+					</a>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>

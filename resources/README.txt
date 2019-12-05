@@ -1,0 +1,3 @@
+由于未作windows和linux静态资源文件夹位置的兼容，因此该项目只能在linux上作为springboot的jar包运行
+
+若想在windows上运行，需要将UserController类的postUserImage()方法里的图片存储路径作修改
